@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+
+  honey-server:
+    container_name: honey-server
+    build:
+      context: ./honey-server
+    volumes:
+      - ./honey-server/src:/honey-server/src
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=development
+
+  honey-web:
+    container_name: honey-web
+    build:
+      context: ./honey-web
+    volumes:
+      - ./honey-web/src:/honey-web/src
+    ports:
+      - "9000:9000"
