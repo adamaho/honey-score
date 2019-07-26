@@ -15,7 +15,9 @@ const LogoContainer = styled.div`
 
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
+  align-items: center;
+
+  height: 300px;
 `;
 
 const StyledInput = styled(Input)`
