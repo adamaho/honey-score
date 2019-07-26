@@ -20,6 +20,10 @@ import {
   ApolloProvider
 } from 'react-apollo';
 
+import {
+  ThemeProvider,
+  theme
+} from 'kingsbury/lib';
 
 import {
   App
@@ -34,7 +38,9 @@ const client = new ApolloClient({
 
 render (
   <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
       <App />
+    </ThemeProvider>
   </ApolloProvider>, 
   document.getElementById('root')
 );

@@ -1,13 +1,35 @@
 import * as React from 'react';
 
 import {
-  ThemeProvider,
-  theme,
+  createGlobalStyle
 } from 'kingsbury/lib';
 
+import Main from './pages/Main';
+
+const GlobalStyles = createGlobalStyle`
+  html {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  #root, .app {
+    height: 100%;
+    width: 100%;
+  }
+`
+
 export const App = () => (
-  <ThemeProvider theme={theme}>
-    <div>HoneyScore</div>
-  </ThemeProvider>
+  <div className="app">
+    <GlobalStyles />
+    <Main />
+  </div>
 );
 
