@@ -47,7 +47,7 @@
     "apollo-upload-client": "^11.0.0",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
-    "kingsbury": "^0.0.8",
+    "kingsbury": "^0.0.10",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
