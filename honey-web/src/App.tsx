@@ -9,7 +9,7 @@ import Main from './pages/Main';
 const GlobalStyles = createGlobalStyle`
   html {
     margin: 0;
-    height: 100%;
+    height: 100vh;
     width: 100%;
   }
 
@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     height: 100%;
     width: 100%;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Permanent Marker', cursive;
   }
 
   #root, .app {

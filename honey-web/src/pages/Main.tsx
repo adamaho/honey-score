@@ -7,6 +7,10 @@ import {
   Redirect
 } from 'react-router-dom';
 
+import {
+  Login
+} from '.';
+
 const Main: React.FunctionComponent = () => (
   <Router>
     <Switch>
@@ -17,7 +21,7 @@ const Main: React.FunctionComponent = () => (
       />
       <Route
         path="/login"
-        render={() => <div>Login</div>}
+        component={Login}
         exact={true}
       />
       <Redirect to="/" />
