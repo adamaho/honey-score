@@ -1,4 +1,4 @@
 export const ROUTES = {
-  MAIN: '/',
+  SCOREBOARDS: '/scoreboards',
   LOGIN: '/login'
 };
