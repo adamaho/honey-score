@@ -1,17 +1,6 @@
 version: "3.7"
 services:
 
-  honey-server:
-    container_name: honey-server
-    build:
-      context: ./honey-server
-    volumes:
-      - ./honey-server/src:/honey-server/src
-    ports:
-      - "8000:8000"
-    environment:
-      - NODE_ENV=development
-
   honey-web:
     container_name: honey-web
     build:
@@ -20,3 +9,31 @@ services:
       - ./honey-web/src:/honey-web/src
     ports:
       - "9000:9000"
+
+  honey-server:
+    container_name: honey-server
+    build:
+      context: ./honey-server
+    depends_on:
+      - honey-database
+    volumes:
+      - ./honey-server/src:/honey-server/src
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=development
+
+  honey-database:
+    image: postgres:9.5
+    container_name: "honey-database"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=honey
+      - POSTGRES_PASSWORD=honey
+      - POSTGRES_DB=honey-database
+    volumes:
+      - db:/var/lib/postgres
+
+volumes:
+  db:

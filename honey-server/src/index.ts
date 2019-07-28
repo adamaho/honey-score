@@ -1,5 +1,14 @@
 import * as path from 'path';
 import * as koa from 'koa';
+import * as jwt from 'jsonwebtoken';
+
+import {
+  ApolloServer
+} from 'apollo-server-koa';
+
+import {
+  createConnection
+} from 'typeorm';
 
 import {
   fileLoader,
@@ -8,8 +17,8 @@ import {
 } from 'merge-graphql-schemas';
 
 import {
-  ApolloServer
-} from 'apollo-server-koa';
+  applyMiddleware
+} from 'graphql-middleware';
 
 const port = 8000;
 
@@ -21,11 +30,43 @@ const resolversArray = fileLoader(path.join(__dirname, "./**/*.resolvers.*"));
 const typeDefs = mergeTypes(typesArray);
 const resolvers = mergeResolvers(resolversArray);
 
-// Init the apollo server
-const server = new ApolloServer({
+
+// Check auth token against the secret
+const getUser = (token) => {
+  try {
+    if (token) {
+      return jwt.verify(token, 'jwt_secret');
+    }
+  } catch (error) {
+    return null;
+  }
+}
+
+const logResult = async (resolve, root, args, context, info) => {
+  console.log(`2. logResult`)
+  const result = await resolve(root, args, context, info)
+  console.log(context);
+  return result
+};
+
+const schema = applyMiddleware({
   typeDefs,
   resolvers,
-  context: (ctx) => ctx
+  logResult
+});
+
+// Init the apollo server
+const server = new ApolloServer({
+  schema,
+  context: ({ ctx: { request }}) => {
+    const tokenWithBearer = request.headers.authorization || ''
+    const token = tokenWithBearer.split(' ')[1]
+    const user = getUser(token);
+
+    return {
+      user
+    };
+  }
 });
 
 // Init the koa app
@@ -34,5 +75,8 @@ const app = new koa();
 // attach koa app to the Apollo Server
 server.applyMiddleware({ app });
 
-// start the server
-app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`));
+// create connection to db
+createConnection().then(async () => {
+  app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`));
+})
+.catch((error) => console.log('TypeORM connection error: ', error));
