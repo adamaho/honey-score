@@ -8,13 +8,17 @@ import {
 } from 'react-router-dom';
 
 import {
+  AuthorizeRoute
+} from '../components/AuthorizeRoute';
+
+import {
   Login
 } from '.';
 
 const Main: React.FunctionComponent = () => (
   <Router>
     <Switch>
-      <Route
+      <AuthorizeRoute
         path="/"
         render={() => <div>Main</div>}
         exact={true}

@@ -1,35 +1,30 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import * as Yup from 'yup';
 
 import {
-  styled,
-  Input,
-  Button
+  RouteComponentProps
+} from 'react-router-dom';
+
+import {
+  styled
 } from 'kingsbury/lib';
 
 import {
-  Formik,
-  Form,
-  FormikProps,
-  FormikActions
-} from 'formik';
+  ROUTES
+} from '~constants/routes';
 
 import {
   Logo
 } from '../../components';
 
-interface ILoginForm {
-  email: string;
-  password: string;
-}
+import {
+  ILoginResult
+} from './types';
 
-const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Please enter a vaild email')
-    .required('Please enter an email'),
-  password: Yup.string().required('Please enter a password')
-});
+import LoginForm from './LoginForm';
+import console = require('console');
+
+interface ILoginProps extends RouteComponentProps {};
 
 const LogoContainer = styled.div`
 /* Will need to add some support for media queries here */
@@ -39,20 +34,6 @@ const LogoContainer = styled.div`
   align-items: center;
 
   height: 200px;
-`;
-
-const StyledInput = styled(Input)`
-  margin-bottom: 20px;
-`;
-
-const InputError = styled.p`
-  margin-top: 0px;
-  font-size: 12px;
-`;
-
-const StyledButton = styled(Button)`
-  width: 100%;
-  margin-top: 20px;
 `;
 
 const FormContainer = styled.div`
@@ -68,11 +49,19 @@ const FormContent = styled.div`
   width: 100%;
 `;
 
-class Login extends React.Component {
-  
-  onSubmit = (values: ILoginForm, { setSubmitting }: FormikActions<ILoginForm>) => {
-    // exec mutation here
+class Login extends React.Component<ILoginProps> {
 
+  onLoginResult = (result: ILoginResult) => {
+    const {
+      history
+    } = this.props;
+
+    if (result.error) {
+      console.log(result.error);
+    } else {
+      localStorage.setItem('token', result.token);
+      history.push(ROUTES.MAIN);
+    }
   }
 
   render() {
@@ -83,52 +72,7 @@ class Login extends React.Component {
         </LogoContainer>
         <FormContainer>
           <FormContent>
-            <Formik
-              validateOnChange={false}
-              validateOnBlur={true}
-              initialValues={{
-                email: '',
-                password: ''
-              }}
-              validationSchema={loginSchema}
-              onSubmit={this.onSubmit}
-              render={({
-                errors,
-                handleChange,
-                isSubmitting
-              }: FormikProps<ILoginForm>) => {
-                return (
-                  <Form>
-                    <StyledInput
-                      id="email"
-                      name="email"
-                      label="Email"
-                      placeholder="your@email.com"
-                      error={errors.email}
-                      errorComponent={(error) => <InputError>{error}</InputError>}
-                      onChange={handleChange}
-                    />
-                    <StyledInput
-                      id="password"
-                      name="password"
-                      label="Password"
-                      placeholder="password"
-                      type="password"
-                      error={errors.password}
-                      errorComponent={(error) => <InputError>{error}</InputError>}
-                      onChange={handleChange}
-                    />
-                    <StyledButton
-                      type="submit"
-                      buttonType="primary"
-                      disabled={isSubmitting}
-                    >
-                      Login
-                    </StyledButton>
-                  </Form>
-                );
-              }}
-            />
+            <LoginForm onLoginResult={this.onLoginResult} />
           </FormContent>
         </FormContainer>
       </div>
