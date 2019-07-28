@@ -1,8 +1,0 @@
-{
-  "name": "honey-auth",
-  "version": "1.0.0",
-  "description": "Auth for HoneyScore",
-  "main": "index.js",
-  "author": "Adam Aho & Brett Bullock",
-  "license": "MIT"
-}
