@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import {
-  styled
+  styled, Notice
 } from 'kingsbury/lib';
 
 import {
@@ -22,9 +22,16 @@ import {
 } from './types';
 
 import LoginForm from './LoginForm';
-import console = require('console');
 
 interface ILoginProps extends RouteComponentProps {};
+
+interface ILoginState {
+  error: string;
+}
+
+const LOGIN_ERROR_MAP: any = {
+  INVALID_CREDENTIALS: 'Invalid email or password'
+}
 
 const LogoContainer = styled.div`
 /* Will need to add some support for media queries here */
@@ -49,7 +56,11 @@ const FormContent = styled.div`
   width: 100%;
 `;
 
-class Login extends React.Component<ILoginProps> {
+class Login extends React.Component<ILoginProps,  ILoginState> {
+
+  state = {
+    error: ''
+  }
 
   onLoginResult = (result: ILoginResult) => {
     const {
@@ -57,7 +68,7 @@ class Login extends React.Component<ILoginProps> {
     } = this.props;
 
     if (result.error) {
-      console.log(result.error);
+      this.setState({ error: result.error });
     } else {
       localStorage.setItem('token', result.token);
       history.push(ROUTES.MAIN);
@@ -65,12 +76,22 @@ class Login extends React.Component<ILoginProps> {
   }
 
   render() {
+    const {
+      error
+    } = this.state;
+
     return (
       <div className="login">
         <LogoContainer>
           <Logo />
         </LogoContainer>
         <FormContainer>
+          {error !== '' &&
+            <Notice
+              type="danger"
+              description={LOGIN_ERROR_MAP[error]}
+            />
+          }
           <FormContent>
             <LoginForm onLoginResult={this.onLoginResult} />
           </FormContent>

@@ -76,8 +76,7 @@ export default {
             userId: newUser.userId,
             email: newUser.email
           },
-          'jwt_secret', 
-          { expiresIn: 60*5 }
+          process.env.TOKEN_SECRET
         ),
         userId: newUser.userId,
         error: null

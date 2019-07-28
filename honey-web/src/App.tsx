@@ -4,7 +4,7 @@ import {
   createGlobalStyle
 } from 'kingsbury/lib';
 
-import Main from './pages/Main';
+import Site from './pages/Site';
 
 const GlobalStyles = createGlobalStyle`
   html {
@@ -29,7 +29,7 @@ const GlobalStyles = createGlobalStyle`
 export const App = () => (
   <div className="app">
     <GlobalStyles />
-    <Main />
+    <Site />
   </div>
 );
 
