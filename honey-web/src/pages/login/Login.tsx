@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Yup from 'yup';
 
 import {
   styled,
@@ -7,8 +8,28 @@ import {
 } from 'kingsbury/lib';
 
 import {
+  Formik,
+  Form,
+  FormikProps,
+  FormikActions
+} from 'formik';
+
+import {
   Logo
 } from '../../components';
+import console = require('console');
+
+interface ILoginForm {
+  email: string;
+  password: string;
+}
+
+const loginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Please enter a vaild email')
+    .required('Please enter an email'),
+  password: Yup.string().required('Please enter a password')
+});
 
 const LogoContainer = styled.div`
 /* Will need to add some support for media queries here */
@@ -42,6 +63,11 @@ const FormContent = styled.div`
 `;
 
 class Login extends React.Component {
+  
+  onSubmit = (values: ILoginForm) => {
+    console.log(values);
+  }
+
   render() {
     return (
       <div className="login">
@@ -50,14 +76,45 @@ class Login extends React.Component {
         </LogoContainer>
         <FormContainer>
           <FormContent>
-            <StyledInput placeholder="your@email.com" />
-            <StyledInput placeholder="password" />
-            <StyledButton
-              type="primary"
-              onClick={() => console.log('login')}
-            >
-              Login
-            </StyledButton>
+            <Formik
+              validateOnChange={false}
+              validateOnBlur={false}
+              initialValues={{
+                email: '',
+                password: ''
+              }}
+              validationSchema={loginSchema}
+              onSubmit={(values: ILoginForm) => this.onSubmit(values)}
+              render={({
+                values,
+                errors,
+                handleChange,
+                isSubmitting
+              }: FormikProps<ILoginForm>) => {
+                return (
+                  <Form noValidate={true}>
+                    <StyledInput
+                      id="email"
+                      name="email"
+                      placeholder="your@email.com"
+                      onChange={handleChange}
+                    />
+                    <StyledInput
+                      id="password"
+                      name="password"
+                      placeholder="password"
+                      onChange={handleChange}
+                    />
+                    <StyledButton
+                      type="submit"
+                      buttonType="primary"
+                    >
+                      Login
+                    </StyledButton>
+                  </Form>
+                );
+              }}
+            />
           </FormContent>
         </FormContainer>
       </div>
