@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import * as Yup from 'yup';
 
 import {
@@ -45,6 +46,11 @@ const StyledInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
+const InputError = styled.p`
+  margin-top: 0px;
+  font-size: 12px;
+`;
+
 const StyledButton = styled(Button)`
   width: 100%;
   margin-top: 20px;
@@ -60,16 +66,13 @@ const FormContainer = styled.div`
 
 const FormContent = styled.div`
   max-width: 400px;
+  width: 100%;
 `;
 
 class Login extends React.Component {
   
   onSubmit = (values: ILoginForm, { setSubmitting }: FormikActions<ILoginForm>) => {
-    console.log(values);
-
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 2000);
+    // exec mutation here
 
   }
 
@@ -83,7 +86,7 @@ class Login extends React.Component {
           <FormContent>
             <Formik
               validateOnChange={false}
-              validateOnBlur={false}
+              validateOnBlur={true}
               initialValues={{
                 email: '',
                 password: ''
@@ -91,24 +94,30 @@ class Login extends React.Component {
               validationSchema={loginSchema}
               onSubmit={this.onSubmit}
               render={({
-                values,
                 errors,
                 handleChange,
                 isSubmitting
               }: FormikProps<ILoginForm>) => {
                 console.log(errors);
                 return (
-                  <Form noValidate={true}>
+                  <Form>
                     <StyledInput
                       id="email"
                       name="email"
+                      label="Email"
                       placeholder="your@email.com"
+                      error={errors.email}
+                      errorComponent={(error) => <InputError>{error}</InputError>}
                       onChange={handleChange}
                     />
                     <StyledInput
                       id="password"
                       name="password"
+                      label="Password"
                       placeholder="password"
+                      type="password"
+                      error={errors.password}
+                      errorComponent={(error) => <InputError>{error}</InputError>}
                       onChange={handleChange}
                     />
                     <StyledButton

@@ -1123,6 +1123,11 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/lodash@^4.14.136":
+  version "4.14.136"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.136.tgz#413e85089046b865d960c9ff1d400e04c31ab60f"
+  integrity sha512-0GJhzBdvsW2RUccNHOBkabI8HZVdOXmXbXhuKlDEd5Vv12P7oAVGfomGp3Ne21o5D/qu1WmthlNKFaoZJJeErA==
+
 "@types/node@>=6":
   version "12.6.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.2.tgz#a5ccec6abb6060d5f20d256fb03ed743e9774999"
@@ -4520,10 +4525,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-kingsbury@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/kingsbury/-/kingsbury-0.0.13.tgz#8dcc20a9f7113636f54522796fbf3ff672fbbeee"
-  integrity sha512-xHUK4ox319s8WesnwgBBPipf2vgp+aEfZV8xJb2o4KDP+ICigQc5PlVrN7/mn9/nbmBibL0nLJHCOckL4kkuSw==
+kingsbury@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/kingsbury/-/kingsbury-0.0.17.tgz#6996b7373cededd032747c422a3c8df0c3cc554a"
+  integrity sha512-sWebjiJi82C/9BM3QdkH5QoCUO/c1yvo7RCyYpjsSbJ/ToiyMrBHGf0f9h2Q8bTH2WuKdj8t4gOuRtuyFEhq+Q==
   dependencies:
     lodash "^4.17.15"
     react "^16.8.6"
