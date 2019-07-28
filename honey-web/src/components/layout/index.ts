@@ -1,5 +1,11 @@
+import { View } from './View';
 import { ViewHeader } from './ViewHeader';
+import { ViewBody } from './ViewBody';
+import { ViewFooter } from './ViewFooter';
 
 export {
-  ViewHeader
+  View,
+  ViewHeader,
+  ViewBody,
+  ViewFooter
 };

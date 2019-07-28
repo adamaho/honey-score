@@ -5,10 +5,6 @@ import {
   H1
 } from 'kingsbury/lib';
 
-import {
-  AddButton
-} from '~components/buttons/AddButton';
-
 interface IViewHeaderProps {
   title: string;
   onCreateNew?: () => void;
@@ -16,37 +12,17 @@ interface IViewHeaderProps {
 
 const ViewHeaderContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const ViewHeaderControls = styled.div`
-  display: flex;
   flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
+  align-content: flex-end;
+  justify-content: center;
 
-  margin-top: 20px;
-  padding: 0px 20px;
-`;
-
-const ViewHeaderTitle = styled.div`
-  text-align: center;
-  margin-top: 20px;
+  height: 100px;
 `;
 
 export const ViewHeader: React.FunctionComponent<IViewHeaderProps> = ({
-  title,
-  onCreateNew
+  title
 }) => (
   <ViewHeaderContainer>
-    <ViewHeaderControls>
-      {onCreateNew &&
-        <AddButton onClick={onCreateNew}/>
-      }
-    </ViewHeaderControls>
-    <ViewHeaderTitle>
-      <H1>{title}</H1>
-    </ViewHeaderTitle>
+    <H1>{title}</H1>
   </ViewHeaderContainer>
 );
