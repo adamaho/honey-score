@@ -1,35 +1,37 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import * as Yup from 'yup';
 
 import {
-  styled,
-  Input,
-  Button
+  RouteComponentProps
+} from 'react-router-dom';
+
+import {
+  styled, Notice
 } from 'kingsbury/lib';
 
 import {
-  Formik,
-  Form,
-  FormikProps,
-  FormikActions
-} from 'formik';
+  ROUTES
+} from '~constants/routes';
 
 import {
   Logo
 } from '../../components';
 
-interface ILoginForm {
-  email: string;
-  password: string;
+import {
+  ILoginResult
+} from './types';
+
+import LoginForm from './LoginForm';
+
+interface ILoginProps extends RouteComponentProps {};
+
+interface ILoginState {
+  error: string;
 }
 
-const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Please enter a vaild email')
-    .required('Please enter an email'),
-  password: Yup.string().required('Please enter a password')
-});
+const LOGIN_ERROR_MAP: any = {
+  INVALID_CREDENTIALS: 'Invalid email or password'
+}
 
 const LogoContainer = styled.div`
 /* Will need to add some support for media queries here */
@@ -39,20 +41,6 @@ const LogoContainer = styled.div`
   align-items: center;
 
   height: 200px;
-`;
-
-const StyledInput = styled(Input)`
-  margin-bottom: 20px;
-`;
-
-const InputError = styled.p`
-  margin-top: 0px;
-  font-size: 12px;
-`;
-
-const StyledButton = styled(Button)`
-  width: 100%;
-  margin-top: 20px;
 `;
 
 const FormContainer = styled.div`
@@ -68,67 +56,44 @@ const FormContent = styled.div`
   width: 100%;
 `;
 
-class Login extends React.Component {
-  
-  onSubmit = (values: ILoginForm, { setSubmitting }: FormikActions<ILoginForm>) => {
-    // exec mutation here
+class Login extends React.Component<ILoginProps,  ILoginState> {
 
+  state = {
+    error: ''
+  }
+
+  onLoginResult = (result: ILoginResult) => {
+    const {
+      history
+    } = this.props;
+
+    if (result.error) {
+      this.setState({ error: result.error });
+    } else {
+      localStorage.setItem('token', result.token);
+      history.push(ROUTES.MAIN);
+    }
   }
 
   render() {
+    const {
+      error
+    } = this.state;
+
     return (
       <div className="login">
         <LogoContainer>
           <Logo />
         </LogoContainer>
         <FormContainer>
-          <FormContent>
-            <Formik
-              validateOnChange={false}
-              validateOnBlur={true}
-              initialValues={{
-                email: '',
-                password: ''
-              }}
-              validationSchema={loginSchema}
-              onSubmit={this.onSubmit}
-              render={({
-                errors,
-                handleChange,
-                isSubmitting
-              }: FormikProps<ILoginForm>) => {
-                return (
-                  <Form>
-                    <StyledInput
-                      id="email"
-                      name="email"
-                      label="Email"
-                      placeholder="your@email.com"
-                      error={errors.email}
-                      errorComponent={(error) => <InputError>{error}</InputError>}
-                      onChange={handleChange}
-                    />
-                    <StyledInput
-                      id="password"
-                      name="password"
-                      label="Password"
-                      placeholder="password"
-                      type="password"
-                      error={errors.password}
-                      errorComponent={(error) => <InputError>{error}</InputError>}
-                      onChange={handleChange}
-                    />
-                    <StyledButton
-                      type="submit"
-                      buttonType="primary"
-                      disabled={isSubmitting}
-                    >
-                      Login
-                    </StyledButton>
-                  </Form>
-                );
-              }}
+          {error !== '' &&
+            <Notice
+              type="danger"
+              description={LOGIN_ERROR_MAP[error]}
             />
+          }
+          <FormContent>
+            <LoginForm onLoginResult={this.onLoginResult} />
           </FormContent>
         </FormContainer>
       </div>

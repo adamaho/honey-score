@@ -8,15 +8,20 @@ import {
 } from 'react-router-dom';
 
 import {
-  Login
+  AuthorizeRoute
+} from '../components/AuthorizeRoute';
+
+import {
+  Login,
+  Main
 } from '.';
 
-const Main: React.FunctionComponent = () => (
+const Site: React.FunctionComponent = () => (
   <Router>
     <Switch>
-      <Route
+      <AuthorizeRoute
         path="/"
-        render={() => <div>Main</div>}
+        component={Main}
         exact={true}
       />
       <Route
@@ -29,4 +34,4 @@ const Main: React.FunctionComponent = () => (
   </Router>
 );
 
-export default Main;
+export default Site;
