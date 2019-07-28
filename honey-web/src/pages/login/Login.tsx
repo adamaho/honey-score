@@ -64,8 +64,13 @@ const FormContent = styled.div`
 
 class Login extends React.Component {
   
-  onSubmit = (values: ILoginForm) => {
+  onSubmit = (values: ILoginForm, { setSubmitting }: FormikActions<ILoginForm>) => {
     console.log(values);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 2000);
+
   }
 
   render() {
@@ -84,13 +89,14 @@ class Login extends React.Component {
                 password: ''
               }}
               validationSchema={loginSchema}
-              onSubmit={(values: ILoginForm) => this.onSubmit(values)}
+              onSubmit={this.onSubmit}
               render={({
                 values,
                 errors,
                 handleChange,
                 isSubmitting
               }: FormikProps<ILoginForm>) => {
+                console.log(errors);
                 return (
                   <Form noValidate={true}>
                     <StyledInput
@@ -108,6 +114,7 @@ class Login extends React.Component {
                     <StyledButton
                       type="submit"
                       buttonType="primary"
+                      disabled={isSubmitting}
                     >
                       Login
                     </StyledButton>
