@@ -1,0 +1,5 @@
+type LoginResult {
+  token: String
+  userId: String
+  error: String
+}

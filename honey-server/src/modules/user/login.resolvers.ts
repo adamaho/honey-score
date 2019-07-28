@@ -2,10 +2,6 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
 import {
-  Context
-} from 'koa';
-
-import {
   User
 } from '../../entity/User';
 
@@ -26,25 +22,37 @@ export default {
 
       // if not user then return
       if (!user) {
-        return;
+        return {
+          token: null,
+          userId: null,
+          error: 'INVALID_CREDENTIALS'
+        };
       }
 
-      const validPassword = password === user.password;
+      const validPassword = await bcrypt.compare(password, user.password);
 
       // if not valid password then return
       if (!validPassword) {
-        return;
+        return {
+          token: null,
+          userId: null,
+          error: 'INVALID_CREDENTIALS'
+        };
       }
 
       // if all things are good, sign a token and return it
-      return jwt.sign(
-        {
-          userId: user.userId,
-          email: user.email
-        },
-        'jwt_secret', 
-        { expiresIn: 60*5 }
-      );
+      return {
+        token: jwt.sign(
+          {
+            userId: user.userId,
+            email: user.email
+          },
+          'jwt_secret', 
+          { expiresIn: 60*5 }
+        ),
+        userId: user.userId,
+        error: null
+      };
     }
   }
 }

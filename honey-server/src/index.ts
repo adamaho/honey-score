@@ -3,10 +3,6 @@ import * as koa from 'koa';
 import * as jwt from 'jsonwebtoken';
 
 import {
-  ApolloServer
-} from 'apollo-server-koa';
-
-import {
   createConnection
 } from 'typeorm';
 
@@ -17,8 +13,8 @@ import {
 } from 'merge-graphql-schemas';
 
 import {
-  applyMiddleware
-} from 'graphql-middleware';
+  ApolloServer
+} from 'apollo-server-koa';
 
 const port = 8000;
 
@@ -42,22 +38,10 @@ const getUser = (token) => {
   }
 }
 
-const logResult = async (resolve, root, args, context, info) => {
-  console.log(`2. logResult`)
-  const result = await resolve(root, args, context, info)
-  console.log(context);
-  return result
-};
-
-const schema = applyMiddleware({
-  typeDefs,
-  resolvers,
-  logResult
-});
-
 // Init the apollo server
 const server = new ApolloServer({
-  schema,
+  typeDefs,
+  resolvers,
   context: ({ ctx: { request }}) => {
     const tokenWithBearer = request.headers.authorization || ''
     const token = tokenWithBearer.split(' ')[1]
