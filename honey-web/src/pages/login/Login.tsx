@@ -18,7 +18,6 @@ import {
 import {
   Logo
 } from '../../components';
-import console = require('console');
 
 interface ILoginForm {
   email: string;
@@ -39,7 +38,7 @@ const LogoContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  height: 300px;
+  height: 200px;
 `;
 
 const StyledInput = styled(Input)`
@@ -98,7 +97,6 @@ class Login extends React.Component {
                 handleChange,
                 isSubmitting
               }: FormikProps<ILoginForm>) => {
-                console.log(errors);
                 return (
                   <Form>
                     <StyledInput

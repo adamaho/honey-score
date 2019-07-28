@@ -22,7 +22,11 @@ const typeDefs = mergeTypes(typesArray);
 const resolvers = mergeResolvers(resolversArray);
 
 // Init the apollo server
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: (ctx) => ctx
+});
 
 // Init the koa app
 const app = new koa();
