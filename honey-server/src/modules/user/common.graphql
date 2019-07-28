@@ -1,5 +1,5 @@
 type LoginResult {
   token: String
-  userId: String
+  userId: Int
   error: String
 }
