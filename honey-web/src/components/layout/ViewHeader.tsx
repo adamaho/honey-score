@@ -7,7 +7,6 @@ import {
 
 interface IViewHeaderProps {
   title: string;
-  onCreateNew?: () => void;
 };
 
 const ViewHeaderContainer = styled.div`

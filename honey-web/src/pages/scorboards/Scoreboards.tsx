@@ -6,23 +6,20 @@ import {
 
 import {
   View,
-  ViewHeader,
-  ViewBody,
-  ViewFooter
-} from '../../components/layout'
-import { ScoreboardFooter } from './ScoreboardFooter';
+  ViewHeader
+} from '~components/layout'
+
+import {
+  ScoreboardBody,
+  ScoreboardFooter
+} from '.';
  
 export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
   history
 }) => (
   <View>
-    <ViewHeader
-      title="Scoreboards"
-      onCreateNew={() => console.log('asdfasdf')}
-    />
-    <ViewBody>
-      This is the main Scoreboards
-    </ViewBody>
+    <ViewHeader title="Scoreboards" />
+    <ScoreboardBody history={history} />
     <ScoreboardFooter history={history} />
   </View>
 );
