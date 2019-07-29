@@ -1,13 +1,20 @@
 import * as React from 'react';
 
 import {
+  RouteComponentProps
+} from 'react-router';
+
+import {
   View,
   ViewHeader,
   ViewBody,
   ViewFooter
 } from '../../components/layout'
+import { ScoreboardFooter } from './ScoreboardFooter';
  
-export const Scoreboards: React.FunctionComponent = () => (
+export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
+  history
+}) => (
   <View>
     <ViewHeader
       title="Scoreboards"
@@ -16,9 +23,7 @@ export const Scoreboards: React.FunctionComponent = () => (
     <ViewBody>
       This is the main Scoreboards
     </ViewBody>
-    <ViewFooter>
-      asdasd
-    </ViewFooter>
+    <ScoreboardFooter history={history} />
   </View>
 );
 

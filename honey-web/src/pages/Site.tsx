@@ -20,6 +20,11 @@ const Site: React.FunctionComponent = () => (
   <Router>
     <Switch>
       <AuthorizeRoute
+        path="/scoreboards/:id"
+        render={() => <div>create new scoreboard</div>}
+        exact={true}
+      />
+      <AuthorizeRoute
         path="/scoreboards"
         component={Scoreboards}
         exact={true}

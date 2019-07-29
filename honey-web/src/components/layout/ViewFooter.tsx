@@ -5,15 +5,16 @@ import {
 } from 'kingsbury/lib';
 
 const ViewFooterContainer = styled.div`
-  position: absolute;
-  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   height: 60px;
+
+  padding: 0px 15px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
-
-  width: 100%;
 `;
 
 export const ViewFooter: React.FunctionComponent = ({
