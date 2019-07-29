@@ -1,7 +1,7 @@
 import Login from './login/Login';
-import { Main } from './main/Main';
+import { Scoreboards } from './scorboards/Scoreboards';
 
 export {
   Login,
-  Main
+  Scoreboards
 };

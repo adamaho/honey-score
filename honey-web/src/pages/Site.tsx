@@ -13,15 +13,20 @@ import {
 
 import {
   Login,
-  Main
+  Scoreboards
 } from '.';
 
 const Site: React.FunctionComponent = () => (
   <Router>
     <Switch>
       <AuthorizeRoute
-        path="/"
-        component={Main}
+        path="/scoreboards/:id"
+        render={() => <div>create new scoreboard</div>}
+        exact={true}
+      />
+      <AuthorizeRoute
+        path="/scoreboards"
+        component={Scoreboards}
         exact={true}
       />
       <Route
@@ -29,7 +34,7 @@ const Site: React.FunctionComponent = () => (
         component={Login}
         exact={true}
       />
-      <Redirect to="/" />
+      <Redirect to="/scoreboards" />
     </Switch>
   </Router>
 );

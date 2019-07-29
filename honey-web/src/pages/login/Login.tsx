@@ -71,7 +71,7 @@ class Login extends React.Component<ILoginProps,  ILoginState> {
       this.setState({ error: result.error });
     } else {
       localStorage.setItem('token', result.token);
-      history.push(ROUTES.MAIN);
+      history.push(ROUTES.SCOREBOARDS);
     }
   }
 
