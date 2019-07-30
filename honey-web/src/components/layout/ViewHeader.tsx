@@ -18,9 +18,6 @@ const ViewHeaderContainer = styled.div`
   z-index: 1;
   height: 60px;
 
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
-
   box-shadow: 0px 0px 7px rgba(0,0,0,0.25);
 `;
 

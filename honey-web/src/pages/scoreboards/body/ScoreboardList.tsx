@@ -36,6 +36,7 @@ interface IScoreboardListCardProps {
 
 interface ITest {
   game: string;
+  thing: string;
 }
 
 
@@ -44,7 +45,7 @@ const ScoreboardListContainer = styled.div`
   max-width: 700px;
 `;
 
-const ScoreboardListCard = styled<any>(Card)`
+const ScoreboardListCard = styled(Card)<ITest>`
   display: flex;
   align-items: flex-start;
   border-left: 20px solid ${(props) => SUPPORTED_GAMES[props.game].color};
@@ -74,6 +75,7 @@ const ScoreboardListItem: React.FunctionComponent<IScoreboardListCardProps> = ({
 }) => (
   <ScoreboardListCard
     game={game}
+    thing={'asdfasdf'}
     onClick={onClick}
   >
     <H3>{name}</H3>
