@@ -21,13 +21,16 @@ import {
 } from 'react-apollo';
 
 import {
-  ThemeProvider,
-  theme
+  ThemeProvider
 } from 'kingsbury/lib';
 
 import {
   App
 } from './App';
+
+import {
+  lightTheme
+} from '~constants/theme';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -38,7 +41,7 @@ const client = new ApolloClient({
 
 render (
   <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={lightTheme}>
       <App />
     </ThemeProvider>
   </ApolloProvider>, 

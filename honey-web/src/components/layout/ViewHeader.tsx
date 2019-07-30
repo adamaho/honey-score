@@ -12,10 +12,16 @@ interface IViewHeaderProps {
 const ViewHeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-content: flex-end;
   justify-content: center;
+  align-items: center;
 
-  height: 100px;
+  z-index: 1;
+  height: 60px;
+
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+
+  box-shadow: 0px 0px 7px rgba(0,0,0,0.25);
 `;
 
 export const ViewHeader: React.FunctionComponent<IViewHeaderProps> = ({

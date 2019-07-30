@@ -9,6 +9,7 @@ const ViewFooterContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
 
+  z-index: 1;
   height: 60px;
 
   padding: 0px 15px;
