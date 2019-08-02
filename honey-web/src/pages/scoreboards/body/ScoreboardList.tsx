@@ -8,16 +8,13 @@ import {
   styled,
   Card,
   H3,
-  P
+  P,
+  Tag
 } from 'kingsbury/lib';
 
 import {
   IScoreboard
 } from '../types';
-
-import {
-  SUPPORTED_GAMES
-} from '~constants/games';
 
 import {
   ROUTES
@@ -29,15 +26,9 @@ interface IScoreboardListProps {
 };
 
 interface IScoreboardListCardProps {
-  name: string;
-  game: string;
+  scoreboard: IScoreboard
   onClick: () => void;
 };
-
-interface ITest {
-  game: string;
-  thing: string;
-}
 
 
 const ScoreboardListContainer = styled.div`
@@ -45,10 +36,9 @@ const ScoreboardListContainer = styled.div`
   max-width: 700px;
 `;
 
-const ScoreboardListCard = styled(Card)<ITest>`
+const ScoreboardListCard = styled(Card)`
   display: flex;
   align-items: flex-start;
-  border-left: 20px solid ${(props) => SUPPORTED_GAMES[props.game].color};
 
   width: unset; 
   max-width: 700px;
@@ -69,17 +59,17 @@ const StyledP = styled(P)`
 `;
 
 const ScoreboardListItem: React.FunctionComponent<IScoreboardListCardProps> = ({
-  name,
-  game,
+  scoreboard,
   onClick
 }) => (
   <ScoreboardListCard
-    game={game}
-    thing={'asdfasdf'}
     onClick={onClick}
   >
-    <H3>{name}</H3>
-    <StyledP>{game}</StyledP>
+    <H3>{scoreboard.name}</H3>
+    <StyledP>{scoreboard.game}</StyledP>
+    {scoreboard.players.map((player, index) => (
+      <Tag key={index} text={player} tagType="default" />
+    ))}
   </ScoreboardListCard>
 );
 
@@ -91,8 +81,7 @@ export const ScoreboardList: React.FunctionComponent<IScoreboardListProps> = ({
     {scoreboards.map((scoreboard, index) => (
       <ScoreboardListItem
         key={index}
-        name={scoreboard.name}
-        game={scoreboard.game}
+        scoreboard={scoreboard}
         onClick={() => history.push(ROUTES.EDIT_SCOREBOARD(scoreboard.id))}
       />
     ))}

@@ -25,26 +25,31 @@ const scoreboards = [
     id: 1,
     name: 'Lifetime',
     game: 'BACKGAMMON',
+    players: ['aaho', 'bgoad']
   },
   {
     id: 2,
     name: 'Daily',
-    game: 'BACKGAMMON'
+    game: 'BACKGAMMON',
+    players: ['aaho', 'bgoad']
   },
   {
     id: 3,
     name: 'Lifetime',
-    game: 'LAWN_BOWLING'
+    game: 'LAWN_BOWLING',
+    players: ['aaho', 'bgoad']
   },
   {
     id: 4,
     name: 'Daily',
-    game: 'BACKGAMMON'
+    game: 'BACKGAMMON',
+    players: ['aaho', 'bgoad']
   },
   {
     id: 5,
     name: 'Daily',
-    game: 'LAWN_BOWLING'
+    game: 'LAWN_BOWLING',
+    players: ['aaho', 'bgoad']
   }
 ];
 
