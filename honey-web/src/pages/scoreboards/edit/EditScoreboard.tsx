@@ -17,6 +17,7 @@ interface IContainerProps {
 
 interface IModeConfigObject {
   top: string | number;
+  borderRadius: string;
 }
 
 interface IModeConfig {
@@ -27,13 +28,16 @@ interface IModeConfig {
 
 const MODE_CONFIG_MAP: IModeConfig = {
   CLOSED: {
-    top: '100%'
+    top: '100%',
+    borderRadius: '0px'
   },
   PARTIAL: {
-    top: '70%'
+    top: '70%',
+    borderRadius: '8px'
   },
   OPEN: {
-    top: '0'
+    top: '0',
+    borderRadius: '0px'
   }
 }
 
@@ -45,7 +49,7 @@ const Container = styled.div<IContainerProps>`
   z-index: 1;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: ${(props) => MODE_CONFIG_MAP[props.mode].borderRadius};
 
   transition: all 0.25s cubic-bezier(0, .93, .33, 1.05);
 `;
