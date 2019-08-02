@@ -10,17 +10,15 @@ import {
 } from '~components/layout'
 
 import {
-  ScoreboardBody,
-  ScoreboardFooter
+  ScoreboardBody
 } from '.';
  
 export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
   history
 }) => (
   <View>
-    <ViewHeader title="Scoreboards" />
+    <ViewHeader title="Scoreboards" history={history} />
     <ScoreboardBody history={history} />
-    <ScoreboardFooter history={history} />
   </View>
 );
 

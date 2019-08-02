@@ -17,8 +17,9 @@ import {
 } from '../types';
 
 import {
-  ROUTES
-} from '~constants/routes';
+  ROUTES,
+  SUPPORTED_GAMES
+} from '~constants';
 
 interface IScoreboardListProps {
   scoreboards: IScoreboard[];
@@ -30,13 +31,12 @@ interface IScoreboardListCardProps {
   onClick: () => void;
 };
 
-
 const ScoreboardListContainer = styled.div`
   height: 100%;
   max-width: 700px;
 `;
 
-const ScoreboardListCard = styled(Card)`
+const ScoreboardListCard = styled(Card)<IScoreboardListCardProps>`
   display: flex;
   align-items: flex-start;
 
@@ -45,13 +45,27 @@ const ScoreboardListCard = styled(Card)`
   height: 110px;
 
   margin-bottom: 40px;
+  padding: 10px;
+
+  border-right: 8px solid ${(props) => SUPPORTED_GAMES[props.scoreboard.game].color};
 
   .content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 
-    padding: 10px 0px 0px 10px;
+    height: 100%;
+    width: 100%;
+
+    .kingsbury-tag {
+      margin-right: 5px;
+    }
   }
+`;
+
+const ScoreboardListCardTitle = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledP = styled(P)`
@@ -63,13 +77,22 @@ const ScoreboardListItem: React.FunctionComponent<IScoreboardListCardProps> = ({
   onClick
 }) => (
   <ScoreboardListCard
+    scoreboard={scoreboard}
     onClick={onClick}
   >
-    <H3>{scoreboard.name}</H3>
-    <StyledP>{scoreboard.game}</StyledP>
-    {scoreboard.players.map((player, index) => (
-      <Tag key={index} text={player} tagType="default" />
-    ))}
+    <ScoreboardListCardTitle>
+      <H3>{scoreboard.name}</H3>
+      <StyledP>{SUPPORTED_GAMES[scoreboard.game].title}</StyledP>
+    </ScoreboardListCardTitle>
+    <div>
+      {scoreboard.players.map((player, index) => (
+        <Tag
+          key={index}
+          text={player}
+          tagType="default"
+        />
+      ))}
+    </div>
   </ScoreboardListCard>
 );
 
@@ -87,4 +110,3 @@ export const ScoreboardList: React.FunctionComponent<IScoreboardListProps> = ({
     ))}
   </ScoreboardListContainer>
 );
-

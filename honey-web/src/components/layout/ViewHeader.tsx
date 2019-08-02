@@ -2,29 +2,46 @@ import * as React from 'react';
 
 import {
   styled,
+  Button,
   H1
 } from 'kingsbury/lib';
 
+import {
+  History
+} from 'history';
+
+import {
+  ROUTES
+} from '~constants';
+
 interface IViewHeaderProps {
   title: string;
+  history: History;
 };
 
 const ViewHeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   z-index: 1;
-  height: 60px;
+  height: 100px;
 
-  box-shadow: 0px 0px 7px rgba(0,0,0,0.25);
+  padding: 0px 20px;
 `;
 
 export const ViewHeader: React.FunctionComponent<IViewHeaderProps> = ({
-  title
+  title,
+  history
 }) => (
   <ViewHeaderContainer>
     <H1>{title}</H1>
+    <Button
+      buttonType="primary"
+      onClick={() => history.push(ROUTES.NEW_SCOREBOARD)}
+    >
+      New
+    </Button>
   </ViewHeaderContainer>
 );
