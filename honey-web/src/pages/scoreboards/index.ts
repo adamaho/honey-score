@@ -1,5 +1,5 @@
-import { ScoreboardBody } from './body/ScoreboardBody';
+import { ScoreboardContent } from './list/ScoreboardContent';
 
 export {
-  ScoreboardBody
+  ScoreboardContent
 };

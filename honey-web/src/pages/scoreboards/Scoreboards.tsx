@@ -10,15 +10,21 @@ import {
 } from '~components/layout'
 
 import {
-  ScoreboardBody
+  ScoreboardContent
 } from '.';
+
+import EditScoreboard from './edit/EditScoreboard';
  
 export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
   history
 }) => (
   <View>
-    <ViewHeader title="Scoreboards" history={history} />
-    <ScoreboardBody history={history} />
+    <ViewHeader
+      title="Scoreboards"
+      history={history}
+    />
+    <ScoreboardContent history={history} />
+    <EditScoreboard mode="PARTIAL" />
   </View>
 );
 

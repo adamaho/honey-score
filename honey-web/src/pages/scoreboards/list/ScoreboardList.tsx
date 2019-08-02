@@ -41,7 +41,7 @@ const ScoreboardListCard = styled(Card)<IScoreboardListCardProps>`
   align-items: flex-start;
 
   width: unset; 
-  max-width: 700px;
+  max-width: 400px;
   height: 110px;
 
   margin-bottom: 40px;

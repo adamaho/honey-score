@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import {
   styled,
-  Card,
   H3,
   P
 } from 'kingsbury/lib';
+
+import EditScoreboard from '../edit/EditScoreboard';
 
 const EmptyScoreboardBodyContainer = styled.div`
   display: flex;
@@ -19,10 +20,13 @@ const EmptyScoreboardBodyContainer = styled.div`
 const EmptyCardContent = styled.div`
   text-align: center;
   padding: 10px;
+
+  margin-top: -150px;
 `;
 
 const EmptyCardTitle= styled(H3)`
   margin-bottom: 0px;
+  display: block;
 `;
 
 const EmptyCardDescription = styled(P)`
@@ -32,11 +36,9 @@ const EmptyCardDescription = styled(P)`
 
 export const EmptyScoreboardList: React.FunctionComponent = () => (
   <EmptyScoreboardBodyContainer>
-    <Card>
-      <EmptyCardContent>
-        <EmptyCardTitle>No Scoreboards</EmptyCardTitle>
-        <EmptyCardDescription>Create a new scoreboard to really see who is winning.</EmptyCardDescription>
-      </EmptyCardContent>
-    </Card>
+    <EmptyCardContent>
+      <EmptyCardTitle>No Scoreboards</EmptyCardTitle>
+      <EmptyCardDescription>Create a new scoreboard to really see who is winning.</EmptyCardDescription>
+    </EmptyCardContent>
   </EmptyScoreboardBodyContainer>
 );

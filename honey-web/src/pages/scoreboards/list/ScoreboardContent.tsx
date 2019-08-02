@@ -16,11 +16,15 @@ import {
   ScoreboardList
 } from './ScoreboardList';
 
+import {
+  IScoreboard
+} from '../types';
+
 interface IScoreboardBodyProps {
   history: History;
 }
 
-const scoreboards = [
+const scoreboards: IScoreboard[] = [
   {
     id: 1,
     name: 'Lifetime',
@@ -35,8 +39,8 @@ const scoreboards = [
   },
   {
     id: 3,
-    name: 'Lifetime',
-    game: 'LAWN_BOWLING',
+    name: 'Daily',
+    game: 'BACKGAMMON',
     players: ['aaho', 'bgoad']
   },
   {
@@ -48,19 +52,21 @@ const scoreboards = [
   {
     id: 5,
     name: 'Daily',
-    game: 'LAWN_BOWLING',
+    game: 'BACKGAMMON',
     players: ['aaho', 'bgoad']
   }
 ];
 
-export const ScoreboardBody: React.FunctionComponent<IScoreboardBodyProps> = ({
+export const ScoreboardContent: React.FunctionComponent<IScoreboardBodyProps> = ({
   history
 }) => (
   <ViewBody>
-    {/* <EmptyScoreboardList /> */}
-    <ScoreboardList
-      scoreboards={scoreboards}
-      history={history}
-    />
+    { scoreboards.length === 0 ?
+      <EmptyScoreboardList /> :
+      <ScoreboardList
+        scoreboards={scoreboards}
+        history={history}
+      />
+    }
   </ViewBody>
 );
