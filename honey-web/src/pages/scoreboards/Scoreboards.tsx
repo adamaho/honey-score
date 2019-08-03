@@ -42,7 +42,9 @@ export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
           New
         </Button>
       </ViewHeader>
-      <ScoreboardContent history={history} />
+      <ScoreboardContent
+        history={history}
+      />
       <EditScoreboard
         editView={editView}
         setEditView={setEditView}

@@ -47,14 +47,16 @@ const EDIT_VIEW_CONFIG_MAP: IModeConfig = {
 const Container = styled.div<IContainerProps>`
   position: fixed;
   top: ${(props) => EDIT_VIEW_CONFIG_MAP[props.editView].top};
-  background-color: red;
+  background-color: ${(props) => props.theme.colors.white};
 
   z-index: 1;
   width: 100%;
   height: 100%;
   border-radius: ${(props) => EDIT_VIEW_CONFIG_MAP[props.editView].borderRadius};
 
-  transition: all 0.25s cubic-bezier(0, .93, .33, 1.05);
+  box-shadow: ${(props) => `0px 0px 7px rgba(${props.theme.colors.blackRGB}, 0.20)`};
+
+  transition: all ${(props) => props.theme.animations.time.fast} cubic-bezier(0,1.04,.47,.98);
 `;
 
 const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
