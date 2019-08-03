@@ -5,14 +5,17 @@ import {
   Button
 } from 'kingsbury/lib';
 
-type Mode = 'CLOSED' | 'PARTIAL' | 'OPEN';
+import {
+  EditView
+} from '../Scoreboards';
 
 interface IEditScoreboardProps {
-  mode: Mode;
+  editView: EditView;
+  setEditView: (editView: EditView) => void;
 }
 
 interface IContainerProps {
-  mode: Mode
+  editView: EditView;
 }
 
 interface IModeConfigObject {
@@ -26,7 +29,7 @@ interface IModeConfig {
   OPEN: IModeConfigObject;
 }
 
-const MODE_CONFIG_MAP: IModeConfig = {
+const EDIT_VIEW_CONFIG_MAP: IModeConfig = {
   CLOSED: {
     top: '100%',
     borderRadius: '0px'
@@ -43,36 +46,41 @@ const MODE_CONFIG_MAP: IModeConfig = {
 
 const Container = styled.div<IContainerProps>`
   position: fixed;
-  top: ${(props) => MODE_CONFIG_MAP[props.mode].top};
+  top: ${(props) => EDIT_VIEW_CONFIG_MAP[props.editView].top};
   background-color: red;
 
   z-index: 1;
   width: 100%;
   height: 100%;
-  border-radius: ${(props) => MODE_CONFIG_MAP[props.mode].borderRadius};
+  border-radius: ${(props) => EDIT_VIEW_CONFIG_MAP[props.editView].borderRadius};
 
   transition: all 0.25s cubic-bezier(0, .93, .33, 1.05);
 `;
 
 const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
-  mode
+  editView,
+  setEditView
 }) => {
-  const [modeState, setOpen] = React.useState(mode);
 
   return (
     <Container
-      mode={modeState}
+      editView={editView}
     >
       <Button
         buttonType="primary"
-        onClick={modeState === 'PARTIAL' ? 
-          () => setOpen('OPEN') :
-          () => setOpen('PARTIAL')
+        onClick={editView === 'PARTIAL' ? 
+          () => setEditView('OPEN') :
+          () => setEditView('PARTIAL')
         }
       >
         open
       </Button>
-      adsfasdf
+      <Button
+        buttonType="primary"
+        onClick={() => setEditView('CLOSED')}
+      >
+        close
+      </Button>
     </Container>  
   );
 }
