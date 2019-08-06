@@ -3,12 +3,17 @@ import * as React from 'react';
 import {
   styled,
   Button,
+  Drawer,
   css
 } from 'kingsbury/lib';
 
 import {
   EditView
 } from '../Scoreboards';
+
+import {
+  XIcon
+} from '../../../assets/icons/XIcon';
 
 interface IEditScoreboardProps {
   editView: EditView;
@@ -33,6 +38,10 @@ interface IModeConfig {
 interface IDrawerControlProps {
   side: 'left' | 'right';
   open: boolean;
+};
+
+interface IDrawerButtonProps {
+  side: 'left' | 'right';
 };
 
 const EDIT_VIEW_CONFIG_MAP: IModeConfig = {
@@ -65,20 +74,30 @@ const Container = styled.div<IContainerProps>`
   transition: all ${(props) => props.theme.animations.time.fast} cubic-bezier(0,1.04,.47,.98);
 `;
 
-const ContainerContent = styled.div`
+const ContainerHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+
+  padding: 0px 15px;
 `;
 
 const DrawerControlContainer = styled.div`
   display: flex;
   flex-direction: row;
+
+  cursor: pointer;
+`;
+
+const DrawerButtonContainer = styled.div<IDrawerButtonProps>`
+  margin-top: 10px;
+  align-self: center;
+
+  margin-left: ${(props) => props.side === 'left' ? '10px' : '0px'};
 `;
 
 const DrawerControl = styled.div<IDrawerControlProps>`
   height: 6px;
-  width: 40px;
+  width: 35px;
   border-radius: 3px;
   margin-top: ${(props) => props.open ? '15px' : '10px'};
 
@@ -95,25 +114,26 @@ const DrawerControl = styled.div<IDrawerControlProps>`
   };
 
   transition: all 0.25s ease-out;
-  transition-delay: 0.1s;
+  transition-delay: 0.05s;
 `;
 
 const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
   editView,
   setEditView
 }) => {
+  const isOpen = editView === 'OPEN';
 
   return (
-    <Container
-      editView={editView}
+    <Drawer
+      drawerType="vertical"
+      drawerState={editView}
     >
-      <ContainerContent>
-        <Button
-          buttonType="primary"
-          onClick={() => setEditView('CLOSED')}
-        >
-          close
-        </Button>
+      <ContainerHeader>
+        <DrawerButtonContainer side="left">
+          <div onClick={() => setEditView('CLOSED')}>
+            <XIcon />
+          </div>
+        </DrawerButtonContainer>
         <DrawerControlContainer
           onClick={editView === 'PARTIAL' ? 
             () => setEditView('OPEN') :
@@ -121,22 +141,24 @@ const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
           }
         >
           <DrawerControl
-            open={editView === 'OPEN'}
+            open={isOpen}
             side="left"
           />
           <DrawerControl
-            open={editView === 'OPEN'}
+            open={isOpen}
             side="right"
           />
         </DrawerControlContainer>
-        <Button
-          buttonType="primary"
-          onClick={() => setEditView('CLOSED')}
-        >
-          save
-        </Button>
-      </ContainerContent>
-    </Container>  
+        <DrawerButtonContainer side="right">
+          <Button
+            buttonType="primary"
+            onClick={() => setEditView('CLOSED')}
+          >
+            save
+          </Button>
+        </DrawerButtonContainer>
+      </ContainerHeader>
+    </Drawer>  
   );
 }
 
