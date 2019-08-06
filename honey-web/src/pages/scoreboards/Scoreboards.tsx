@@ -8,6 +8,11 @@ import {
   Button
 } from 'kingsbury/lib';
 
+// TODO: Change this to be included in index in kingsbury
+import {
+  DrawerState
+} from 'kingsbury/lib/components/drawer/types';
+
 import {
   View,
   ViewHeader
@@ -19,16 +24,16 @@ import {
 
 import EditScoreboard from './edit/EditScoreboard';
 
-export type EditView = 'CLOSED' | 'PARTIAL' | 'OPEN';
+export type drawerState = 'CLOSED' | 'PARTIAL' | 'OPEN';
  
 export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
   history
 }) => {
 
   const [
-    editView,
-    setEditView
-  ] = React.useState<EditView>('PARTIAL');
+    drawerState,
+    setDrawerState
+  ] = React.useState<DrawerState>('PARTIAL');
 
   return (
     <View>
@@ -37,7 +42,7 @@ export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
       >
         <Button
           buttonType="primary"
-          onClick={() => setEditView('OPEN')}
+          onClick={() => setDrawerState('OPEN')}
         >
           New
         </Button>
@@ -46,8 +51,8 @@ export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
         history={history}
       />
       <EditScoreboard
-        editView={editView}
-        setEditView={setEditView}
+        drawerState={drawerState}
+        setDrawerState={setDrawerState}
       />
     </View>
   );
