@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import {
   styled,
-  Button
+  Button,
+  css
 } from 'kingsbury/lib';
 
 import {
@@ -31,6 +32,7 @@ interface IModeConfig {
 
 interface IDrawerControlProps {
   side: 'left' | 'right';
+  open: boolean;
 };
 
 const EDIT_VIEW_CONFIG_MAP: IModeConfig = {
@@ -63,6 +65,12 @@ const Container = styled.div<IContainerProps>`
   transition: all ${(props) => props.theme.animations.time.fast} cubic-bezier(0,1.04,.47,.98);
 `;
 
+const ContainerContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const DrawerControlContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -71,14 +79,23 @@ const DrawerControlContainer = styled.div`
 const DrawerControl = styled.div<IDrawerControlProps>`
   height: 6px;
   width: 40px;
-  transform-origin: ${(props) => props.side === 'left' ? 'right' : 'left'};
-  transform:
-    ${(props) => props.side === 'left' && 'translateX(3px)'}
-    rotate(${(props) => props.side === 'left' ? '45deg' : '-45deg'});
-
   border-radius: 3px;
+  margin-top: ${(props) => props.open ? '15px' : '10px'};
 
   background-color: ${(props) => props.theme.colors.darkGrey};
+
+  ${(props) => props.open ? css`
+      transform-origin: center;
+      transform:
+        ${() => props.side === 'left' && 'translateX(10px)'}
+        rotate(${() => props.side === 'left' ? '35deg' : '-35deg'});
+    ` : css`
+      ${props.side === 'left' && `transform: translateX(3px)`};
+    `
+  };
+
+  transition: all 0.25s ease-out;
+  transition-delay: 0.1s;
 `;
 
 const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
@@ -90,21 +107,35 @@ const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
     <Container
       editView={editView}
     >
-      <Button
-        buttonType="primary"
-        onClick={() => setEditView('CLOSED')}
-      >
-        close
-      </Button>
-      <DrawerControlContainer
-        onClick={editView === 'PARTIAL' ? 
-          () => setEditView('OPEN') :
-          () => setEditView('PARTIAL')
-        }
-      >
-        <DrawerControl side="left" />
-        <DrawerControl side="right" />
-      </DrawerControlContainer>
+      <ContainerContent>
+        <Button
+          buttonType="primary"
+          onClick={() => setEditView('CLOSED')}
+        >
+          close
+        </Button>
+        <DrawerControlContainer
+          onClick={editView === 'PARTIAL' ? 
+            () => setEditView('OPEN') :
+            () => setEditView('PARTIAL')
+          }
+        >
+          <DrawerControl
+            open={editView === 'OPEN'}
+            side="left"
+          />
+          <DrawerControl
+            open={editView === 'OPEN'}
+            side="right"
+          />
+        </DrawerControlContainer>
+        <Button
+          buttonType="primary"
+          onClick={() => setEditView('CLOSED')}
+        >
+          save
+        </Button>
+      </ContainerContent>
     </Container>  
   );
 }
