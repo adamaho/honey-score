@@ -31,7 +31,6 @@ const ContainerHeader = styled.div`
 
 const DrawerButtonContainer = styled.div<IDrawerButtonProps>`
   align-self: center;
-
   margin-left: ${(props) => props.side === 'left' ? '10px' : '0px'};
 `;
 

@@ -4917,10 +4917,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-kingsbury@^0.0.35:
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/kingsbury/-/kingsbury-0.0.35.tgz#fc1a9e278d3ca00e248c638be88433c94efb2236"
-  integrity sha512-F84tRBJe3nQYsZDbguskAoxOiB+LTU6Af0VuaLy4XHvz4oMxqLZBk4A+OgmsTlDi0u3AqjxREc5JOKNvUKr+FQ==
+kingsbury@^0.0.41:
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/kingsbury/-/kingsbury-0.0.41.tgz#cc54acd0d3447ac162cd5b128eb7de1c23ee892e"
+  integrity sha512-zSbaIGfhXwBXG+SkPk114b/Aj0ji03LXKUheEZy1oCt8sCiGsTN0faanaOQkD9EI2uzSdhIPsqKwky75/7S2+Q==
   dependencies:
     lodash "^4.17.15"
     react "^16.8.6"
