@@ -9,6 +9,7 @@ import {
 import {
   DrawerState
 } from 'kingsbury/lib/components/drawer/types';
+import EditScoreboardForm from './EditScoreboardForm';
 
 interface IEditScoreboardProps {
   drawerState: DrawerState;
@@ -33,7 +34,9 @@ const EditScoreboard: React.FunctionComponent<IEditScoreboardProps> = ({
         </Button>
       )}
     >
-      asdfasdf
+      <EditScoreboardForm
+        drawerState={drawerState}
+      />
     </Drawer>  
   );
 }

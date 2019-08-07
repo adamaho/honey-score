@@ -6,7 +6,13 @@ import {
   P
 } from 'kingsbury/lib';
 
-import EditScoreboard from '../edit/EditScoreboard';
+import {
+  DrawerState
+} from 'kingsbury/lib/components/drawer/types';
+
+interface IEmptyScoreboardListProps {
+  setDrawerState: (drawerState: DrawerState) => void;
+};
 
 const EmptyScoreboardBodyContainer = styled.div`
   display: flex;
@@ -34,11 +40,25 @@ const EmptyCardDescription = styled(P)`
   margin-top: 5px;
 `;
 
-export const EmptyScoreboardList: React.FunctionComponent = () => (
-  <EmptyScoreboardBodyContainer>
-    <EmptyCardContent>
-      <EmptyCardTitle>No Scoreboards</EmptyCardTitle>
-      <EmptyCardDescription>Create a new scoreboard to really see who is winning.</EmptyCardDescription>
-    </EmptyCardContent>
-  </EmptyScoreboardBodyContainer>
-);
+class EmptyScoreboardList extends React.Component<IEmptyScoreboardListProps> {
+  componentDidMount() {
+    const {
+      setDrawerState
+    } = this.props;
+
+    setDrawerState('PARTIAL');
+  }
+
+  render() {
+    return (
+      <EmptyScoreboardBodyContainer>
+        <EmptyCardContent>
+          <EmptyCardTitle>No Scoreboards</EmptyCardTitle>
+          <EmptyCardDescription>Create a new scoreboard to really see who is winning.</EmptyCardDescription>
+        </EmptyCardContent>
+      </EmptyScoreboardBodyContainer>
+    );
+  }
+};
+
+export default EmptyScoreboardList;

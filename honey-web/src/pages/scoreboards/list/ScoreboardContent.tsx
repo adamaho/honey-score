@@ -5,12 +5,14 @@ import {
 } from 'history';
 
 import {
+  DrawerState
+} from 'kingsbury/lib/components/drawer/types';
+
+import {
   ViewBody
 } from '~components/layout';
 
-import {
-  EmptyScoreboardList
-} from './EmptyScoreboardList';
+import EmptyScoreboardList from './EmptyScoreboardList';
 
 import {
   ScoreboardList
@@ -20,8 +22,9 @@ import {
   IScoreboard
 } from '../types';
 
+
 interface IScoreboardBodyProps {
-  history: History;
+  setDrawerState: (drawerState: DrawerState) => void;
 }
 
 const scoreboards: IScoreboard[] = [
@@ -36,37 +39,23 @@ const scoreboards: IScoreboard[] = [
     name: 'Daily',
     game: 'BACKGAMMON',
     players: ['aaho', 'bgoad']
-  },
-  {
-    id: 3,
-    name: 'Daily',
-    game: 'BACKGAMMON',
-    players: ['aaho', 'bgoad']
-  },
-  {
-    id: 4,
-    name: 'Daily',
-    game: 'BACKGAMMON',
-    players: ['aaho', 'bgoad']
-  },
-  {
-    id: 5,
-    name: 'Daily',
-    game: 'BACKGAMMON',
-    players: ['aaho', 'bgoad']
   }
 ];
 
-export const ScoreboardContent: React.FunctionComponent<IScoreboardBodyProps> = ({
-  history
+const ScoreboardContent: React.FunctionComponent<IScoreboardBodyProps> = ({
+  setDrawerState
 }) => (
   <ViewBody>
-    { scoreboards.length === 0 ?
-      <EmptyScoreboardList /> :
+    {scoreboards.length === 0 ?
+      <EmptyScoreboardList
+        setDrawerState={setDrawerState}
+      /> :
       <ScoreboardList
         scoreboards={scoreboards}
-        history={history}
+        setDrawerState={setDrawerState}
       />
     }
   </ViewBody>
 );
+
+export default ScoreboardContent;

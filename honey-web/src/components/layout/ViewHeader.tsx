@@ -18,7 +18,7 @@ const ViewHeaderContainer = styled.div`
   z-index: 1;
   height: 100px;
 
-  padding: 0px 20px;
+  padding: 0px 15px;
 `;
 
 const ViewHeaderRightContent = styled.div``;

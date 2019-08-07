@@ -18,22 +18,14 @@ import {
   ViewHeader
 } from '~components/layout'
 
-import {
-  ScoreboardContent
-} from '.';
-
+import ScoreboardContent from './list/ScoreboardContent';
 import EditScoreboard from './edit/EditScoreboard';
-
-export type drawerState = 'CLOSED' | 'PARTIAL' | 'OPEN';
  
-export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
-  history
-}) => {
-
+export const Scoreboards: React.FunctionComponent<RouteComponentProps> = () => {
   const [
     drawerState,
     setDrawerState
-  ] = React.useState<DrawerState>('PARTIAL');
+  ] = React.useState<DrawerState>('CLOSED');
 
   return (
     <View>
@@ -48,7 +40,7 @@ export const Scoreboards: React.FunctionComponent<RouteComponentProps> = ({
         </Button>
       </ViewHeader>
       <ScoreboardContent
-        history={history}
+        setDrawerState={setDrawerState}
       />
       <EditScoreboard
         drawerState={drawerState}

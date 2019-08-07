@@ -13,6 +13,10 @@ import {
 } from 'kingsbury/lib';
 
 import {
+  DrawerState
+} from 'kingsbury/lib/components/drawer/types';
+
+import {
   IScoreboard
 } from '../types';
 
@@ -21,9 +25,10 @@ import {
   SUPPORTED_GAMES
 } from '~constants';
 
+
 interface IScoreboardListProps {
   scoreboards: IScoreboard[];
-  history: History;
+  setDrawerState: (drawerState: DrawerState) => void;
 };
 
 interface IScoreboardListCardProps {
@@ -98,14 +103,14 @@ const ScoreboardListItem: React.FunctionComponent<IScoreboardListCardProps> = ({
 
 export const ScoreboardList: React.FunctionComponent<IScoreboardListProps> = ({
   scoreboards,
-  history
+  setDrawerState
 }) => (
   <ScoreboardListContainer>
     {scoreboards.map((scoreboard, index) => (
       <ScoreboardListItem
         key={index}
         scoreboard={scoreboard}
-        onClick={() => history.push(ROUTES.EDIT_SCOREBOARD(scoreboard.id))}
+        onClick={() => setDrawerState('OPEN')}
       />
     ))}
   </ScoreboardListContainer>

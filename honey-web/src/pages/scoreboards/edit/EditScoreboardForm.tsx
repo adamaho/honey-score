@@ -2,24 +2,43 @@ import * as React from 'react';
 
 import {
   styled,
-  Button
+  Button,
+  Input
 } from 'kingsbury/lib';
 
-const Container = styled.div`
-  position: absolute;
-  bottom: 300px;
-  background-color: red;
+import {
+  DrawerState
+} from 'kingsbury/lib/components/drawer/types';
 
-  border-radius: 8px;
+interface IEditScoreboardForm {
+  drawerState: DrawerState
+}
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 15px;
 `;
 
-const EditScoreboardForm: React.FunctionComponent = ({
+const StyledInput = styled(Input)`
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 400px;
+`;
 
-}) => (
-  <Container>
-    adsfasdf
-  </Container>  
-);
+class EditScoreboardForm extends React.Component<IEditScoreboardForm> {
+  render() {
+    return (
+      <Container>
+        <StyledInput label="Name" />
+        <StyledInput label="Game" />
+        <StyledInput label="Players" />
+      </Container>
+    );
+  }
+}
 
 export default EditScoreboardForm;
 

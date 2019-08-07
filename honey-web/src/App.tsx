@@ -11,6 +11,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     height: 100vh;
     width: 100%;
+
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   }
 
   body {
