@@ -32,7 +32,7 @@ class EditScoreboardForm extends React.Component<IEditScoreboardForm> {
   render() {
     return (
       <Container>
-        <StyledInput label="Name" />
+        <StyledInput placeholder="Add Name" size="large" showBorder={false} />
         <StyledInput label="Game" />
         <StyledInput label="Players" />
       </Container>
